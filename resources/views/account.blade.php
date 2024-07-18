@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account</title>
-    <link rel="stylesheet" href="{{ asset('css\app.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
     <div class="container">
@@ -21,15 +20,24 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id ="email" type="email" name="email" value="{{ auth()->user()->email }}" required>
+                <input id="email" type="email" name="email" value="{{ auth()->user()->email }}" required>
             </div>
             <div class="form-group">
-                <button type="submit"> Update </button>
+                <button type="submit">Update</button>
             </div>
         </form>
-        <form method="POST" action="{{ route('logout') }}">
+
+        <form method="POST" action="{{ route('account.delete') }}" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
             @csrf
-            <button type="submit"> Logout </button>
+            @method('DELETE')
+            <div class="delete">
+                <button type="submit">Delete Account</button>
+            </div>
+        </form>
+
+        <form id="logoutForm" method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Logout</button>
         </form>
     </div>
 </body>

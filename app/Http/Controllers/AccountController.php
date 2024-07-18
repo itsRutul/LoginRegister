@@ -35,6 +35,22 @@ class AccountController extends Controller
         return redirect()->route('account')->with('status','Information updated successfully');
     }
 
+    public function delete(Request $request){
+        if(!Auth::check()) {
+            return redirect()->route('login')->with('status', 'You need to login first');
+        }
+
+        $user = Auth::user();
+        $user->delete();
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')->with('status', 'Account deleted successfully');
+    }
+
+
     public function logout(Request $request){
 
         Auth::logout();

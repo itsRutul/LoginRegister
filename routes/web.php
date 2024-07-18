@@ -17,4 +17,6 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/account', [AccountController::class, 'index'])->name('account');
 Route::put('/account', [AccountController::class, 'update'])->name('account.update');
+Route::delete('/account/delete', [AccountController::class, 'delete'])->name('account.delete');
 Route::post('/logout', [AccountController::class, 'logout'])->name('logout');
+
